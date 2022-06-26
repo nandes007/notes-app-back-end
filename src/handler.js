@@ -83,7 +83,7 @@ const editNoteByIdHandler = (request, h) => {
 
     const response = h.response({
       status: 'success',
-      massage: 'Catatan berhasil diperbaharui'
+      message: 'Catatan berhasil diperbarui'
     })
     response.code(200)
     return response
@@ -91,7 +91,7 @@ const editNoteByIdHandler = (request, h) => {
 
   const response = h.response({
     status: 'fail',
-    message: 'Gagal memperbaharui catatan. Id tidak ditemukan'
+    message: 'Gagal memperbarui catatan. Id tidak ditemukan'
   })
   response.code(404)
   return response
