@@ -31,16 +31,16 @@ const init = async () => {
     host: process.env.HOST,
     routes: {
       cors: {
-        origin: ['*'],
-      },
-    },
+        origin: ['*']
+      }
+    }
   })
 
   await server.register([
     {
-      plugin: Jwt,
-    },
-  ]);
+      plugin: Jwt
+    }
+  ])
 
   server.auth.strategy('notesapp_jwt', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
@@ -60,10 +60,10 @@ const init = async () => {
 
   await server.register([
     {
-    plugin: notes,
-    options: {
-      service: notesService,
-      validator: NotesValidator
+      plugin: notes,
+      options: {
+        service: notesService,
+        validator: NotesValidator
       }
     },
     {
@@ -92,8 +92,8 @@ const init = async () => {
     }
   ])
 
-  await server.start();
-  console.log(`Server berjalan pada ${server.info.uri}`);
-};
+  await server.start()
+  console.log(`Server berjalan pada ${server.info.uri}`)
+}
 
-init();
+init()

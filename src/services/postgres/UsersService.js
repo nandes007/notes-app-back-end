@@ -6,33 +6,33 @@ const NotFoundError = require('../../exceptions/NotFoundError')
 const AuthenticationError = require('../../exceptions/AuthenticationError')
 
 class UsersService {
-  constructor() {
+  constructor () {
     this._pool = new Pool()
   }
 
-  async addUser({ username, password, fullname }) {
+  async addUser ({ username, password, fullname }) {
     await this.verifyNewUsername(username)
 
-    const id = `user-${nanoid(16)}`;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const id = `user-${nanoid(16)}`
+    const hashedPassword = await bcrypt.hash(password, 10)
     const query = {
       text: 'INSERT INTO users VALUES($1, $2, $3, $4) RETURNING id',
-      values: [id, username, hashedPassword, fullname],
-    };
+      values: [id, username, hashedPassword, fullname]
+    }
 
-    const result = await this._pool.query(query);
+    const result = await this._pool.query(query)
 
     if (!result.rows.length) {
       throw new InvariantError('User gagal ditambahkan')
     }
 
-    return result.rows[0].id;
+    return result.rows[0].id
   }
 
-  async verifyNewUsername(username) {
+  async verifyNewUsername (username) {
     const query = {
       text: 'SELECT username FROM users WHERE username = $1',
-      values: [username],
+      values: [username]
     }
 
     const result = await this._pool.query(query)
@@ -57,7 +57,7 @@ class UsersService {
     return result.rows[0]
   }
 
-  async verifyUserCredential(username, password) {
+  async verifyUserCredential (username, password) {
     const query = {
       text: 'SELECT id, password FROM users WHERE username = $1',
       values: [username]
@@ -80,7 +80,7 @@ class UsersService {
     return id
   }
 
-  async getUsersByUsername(username) {
+  async getUsersByUsername (username) {
     const query = {
       text: 'SELECT id, username, fullname FROM users WHERE username LIKE $1',
       values: [`%${username}%`]
