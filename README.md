@@ -60,18 +60,23 @@ $ npm run migrate up
 $ npm run start-dev
 ```
 
+## End Point
+
 | Method  |       Path      |    Auth   |    Body Request   |
 | ------- | --------------- | --------- | ----------------- |
-|  POST   | /notes          | `Token`   | { title: string, required }, { title: array[string], required }, { title: array[string], required }
+|  POST   | /notes          | `Token`   | { title: string, required }, { tags: array[string], required }, { body: string, required }
 |  GET    | /notes          | `Token`   |
 |  GET    | /notes/{id}     | `Token`   |
-|  PUT    | /notes/{id}     | `Token`   |
-|  DELETE | /notes/{id}     | `Token`   |
-|  POST   | /users          | `No`      |
+|  PUT    | /notes/{id}     | `Token`   | { title: string, required }, { tags: array[string], required }, { body: string, required }
+|  DELETE | /notes/{id}     | `Token`   | { title: string, required }, { tags: array[string], required }, { body: string, required }
+|  POST   | /users          | `No`      | { username: string, required }, { password: string, required }, { fullname: string, required }
 |  GET    | /users/{id}     | `No`      |
 |  GET    | /users          | `No`      |
-|  POST   | /collaborations | `Token`   |
-|  DELETE | /collaborations | `Token`   |
+|  POST   | /collaborations | `Token`   | { noteId: string, required }, { userId: string, required }
+|  DELETE | /collaborations | `Token`   | { noteId: string, required }, { userId: string, required }
+|  POST   | /authentications| `No`      | { username: string, required }, { password: string, required }
+|  PUT    | /authentications| `No`      | { refreshToken: string, required }
+|  DELETE | /authentications| `No`      | { refreshToken: string, required }
 
 # Example Request (Postman)
 ![note-example-request](https://user-images.githubusercontent.com/61643826/191174136-c7f8f50c-73a5-43af-baa3-fa4dd54bbc63.png)
