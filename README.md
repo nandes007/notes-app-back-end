@@ -59,6 +59,20 @@ $ npm run migrate up
 # Run the local development
 $ npm run start-dev
 ```
+
+| Method  |       Path      |    Auth   |    Body Request   |
+| ------- | --------------- | --------- | ----------------- |
+|  POST   | /notes          | `Token`   | { title: string, required }, { title: array[string], required }, { title: array[string], required }
+|  GET    | /notes          | `Token`   |
+|  GET    | /notes/{id}     | `Token`   |
+|  PUT    | /notes/{id}     | `Token`   |
+|  DELETE | /notes/{id}     | `Token`   |
+|  POST   | /users          | `No`      |
+|  GET    | /users/{id}     | `No`      |
+|  GET    | /users          | `No`      |
+|  POST   | /collaborations | `Token`   |
+|  DELETE | /collaborations | `Token`   |
+
 # Example Request (Postman)
 ![note-example-request](https://user-images.githubusercontent.com/61643826/191174136-c7f8f50c-73a5-43af-baa3-fa4dd54bbc63.png)
 
